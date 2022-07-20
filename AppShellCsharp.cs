@@ -8,7 +8,7 @@ namespace ExampleMauiApp
         public AppShellCsharp()
         {
             var shellContent = new ShellContent();
-            shellContent.Title = "Hello World from ShellC#";
+            shellContent.Title = "StackLayout Example";
 
             var dataTemplate = new DataTemplate(typeof(MainPageCsharp));
 
