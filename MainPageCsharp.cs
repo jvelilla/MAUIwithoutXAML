@@ -12,7 +12,12 @@ public class MainPageCsharp : ContentPage
 
     public MainPageCsharp()
     {
-        Grid grid = new Grid()
+        var resources = new ResourceDictionary
+        {
+            { "PageControlTextColor", Colors.Blue }
+        };
+        this.Resources = resources;
+        Grid grid = new()
         {
             RowDefinitions =
             {
