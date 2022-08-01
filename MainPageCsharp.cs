@@ -81,10 +81,8 @@ public class MainPageCsharp : ContentPage
             VerticalOptions= LayoutOptions.End,
             HorizontalOptions = LayoutOptions.Start 
         };
-        var labelTipPercentageOutput = new Label() { Text = "15%" };
-
+     
         grid.Add(tipPercentage, 0, 3);
-        grid.Add(labelTipPercentageOutput, 1, 3);
 
         tipPercentSlider = new Slider()
         {
