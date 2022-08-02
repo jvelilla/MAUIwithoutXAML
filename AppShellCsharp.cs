@@ -10,11 +10,12 @@ namespace ExampleMauiApp
             var shellContent = new ShellContent();
             shellContent.Title = "StackLayout Example";
 
-            var dataTemplate = new DataTemplate(typeof(MainPageCsharp));
+            var dataTemplate = new DataTemplate(typeof(StandardTipPage));
 
             shellContent.ContentTemplate = dataTemplate;
-            shellContent.Route = "MainPageCsharp";
+            shellContent.Route = "StandardTipPage";
             CurrentItem = shellContent;
+            Routing.RegisterRoute(nameof(MainPageCsharp), typeof(MainPageCsharp));
         }
     }
 
