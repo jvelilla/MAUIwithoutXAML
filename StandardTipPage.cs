@@ -8,6 +8,7 @@ public class StandardTipPage: ContentPage
 {
     private Color colorNavy = Colors.Navy;
     private Color colorSilver = Colors.Silver;
+    private double fontSize = 22.0;
 
     Entry billInput;
     Label totalOutput;
@@ -19,6 +20,14 @@ public class StandardTipPage: ContentPage
    
     public StandardTipPage()
     {
+        var resources = new ResourceDictionary
+        {
+            { "bgColor", Colors.Navy },
+            { "fgColor", Colors.Silver},
+            { "fontSize",22.0}
+        };
+        this.Resources = resources;
+
         LayoutRoot = new()
         {
             RowDefinitions =
@@ -28,22 +37,22 @@ public class StandardTipPage: ContentPage
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) },
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) },
                 new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }
-               },
+            },
             ColumnDefinitions =
             {
                 new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
                 new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) }
             },
             Padding = 10,
-            BackgroundColor = Colors.Silver
+            BackgroundColor = BgColor(),
         };
 
 
         billLabel = new Label()
         {
             Text = "Bill",
-            TextColor = Colors.Navy,
-            FontSize = 22,
+            TextColor = FgColor(),
+            FontSize = FontSize(),
             FontAttributes= FontAttributes.Bold,
         };
 
@@ -60,11 +69,11 @@ public class StandardTipPage: ContentPage
         tipLabel = new Label()
         {
             Text = "Tip",
-            TextColor = Colors.Navy,
-            FontSize = 22,    
+            TextColor = FgColor(),
+            FontSize = FontSize(),    
             FontAttributes  =  FontAttributes.Bold,
         };
-        tipOutput = new Label() { Text = "0.00", TextColor = Colors.Navy, FontSize = 22 };
+        tipOutput = new Label() { Text = "0.00", TextColor = FgColor(), FontSize = FontSize() };
 
         LayoutRoot.Add(tipLabel, 0, 1);
         LayoutRoot.Add(tipOutput, 1, 1);
@@ -73,11 +82,11 @@ public class StandardTipPage: ContentPage
         totalLabel = new Label()
         {
             Text = "Total",
-            TextColor= Colors.Navy,
+            TextColor= FgColor(),
             FontAttributes = FontAttributes.Bold,
-            FontSize = 22
+            FontSize = FontSize()
         };
-        totalOutput = new Label() { Text = "0.00", TextColor = Colors.Navy, FontSize = 22 };
+        totalOutput = new Label() { Text = "0.00", TextColor = FgColor(), FontSize = FontSize() };
 
         LayoutRoot.Add(totalLabel, 0, 2);
         LayoutRoot.Add(totalOutput, 1, 2);
@@ -171,4 +180,40 @@ public class StandardTipPage: ContentPage
     {
         await Shell.Current.GoToAsync(nameof(MainPageCsharp));
     }
+
+    private Color BgColor(){
+        if (this.Resources.TryGetValue("bgColor", out var res))
+        {
+            return (Color)res;
+        }
+        else
+        {
+            return colorNavy;
+        }
+    }
+
+    private Color FgColor()
+    {
+        if (this.Resources.TryGetValue("fgColor", out var res))
+        {
+            return (Color)res;
+        }
+        else
+        {
+            return colorSilver;
+        }
+    }
+
+    private double FontSize() {
+        if (this.Resources.TryGetValue("fontSize", out var res))
+        {
+            return (double)res;
+        }
+        else
+        {
+            return fontSize;
+        }
+
+    }
+
 }
