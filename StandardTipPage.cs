@@ -28,6 +28,7 @@ public class StandardTipPage: ContentPage
         };
         this.Resources = resources;
 
+
         LayoutRoot = new()
         {
             RowDefinitions =
@@ -44,17 +45,17 @@ public class StandardTipPage: ContentPage
                 new ColumnDefinition { Width = new GridLength(3, GridUnitType.Star) }
             },
             Padding = 10,
-            BackgroundColor = BgColor(),
         };
+        LayoutRoot.SetDynamicResource(Grid.BackgroundColorProperty, "bgColor");
 
 
         billLabel = new Label()
         {
             Text = "Bill",
-            TextColor = FgColor(),
-            FontSize = FontSize(),
+            FontSize = fontSize,
             FontAttributes= FontAttributes.Bold,
         };
+        billLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
 
         billInput = new Entry()
         {
@@ -62,6 +63,7 @@ public class StandardTipPage: ContentPage
             Keyboard = Keyboard.Numeric,
             TextColor = Colors.Gray,
         };
+        
 
         LayoutRoot.Add(billLabel, 0, 0);
         LayoutRoot.Add(billInput, 1, 0);
@@ -69,12 +71,18 @@ public class StandardTipPage: ContentPage
         tipLabel = new Label()
         {
             Text = "Tip",
-            TextColor = FgColor(),
-            FontSize = FontSize(),    
+            FontSize = fontSize,
             FontAttributes  =  FontAttributes.Bold,
         };
-        tipOutput = new Label() { Text = "0.00", TextColor = FgColor(), FontSize = FontSize() };
+        tipLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
 
+        tipOutput = new Label() 
+        {
+            Text = "0.00", 
+            FontSize = fontSize
+        };
+        tipOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
+        
         LayoutRoot.Add(tipLabel, 0, 1);
         LayoutRoot.Add(tipOutput, 1, 1);
 
@@ -82,12 +90,17 @@ public class StandardTipPage: ContentPage
         totalLabel = new Label()
         {
             Text = "Total",
-            TextColor= FgColor(),
             FontAttributes = FontAttributes.Bold,
-            FontSize = FontSize()
+            FontSize = fontSize
         };
-        totalOutput = new Label() { Text = "0.00", TextColor = FgColor(), FontSize = FontSize() };
-
+        totalLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
+        totalOutput = new Label()
+        { 
+            Text = "0.00", 
+            FontSize = fontSize
+        };
+        totalOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
+        
         LayoutRoot.Add(totalLabel, 0, 2);
         LayoutRoot.Add(totalOutput, 1, 2);
 
@@ -156,64 +169,20 @@ public class StandardTipPage: ContentPage
 
     void OnLight(object sender, EventArgs e)
     {
-        LayoutRoot.BackgroundColor = colorSilver;
+        this.Resources["fgColor"] = colorNavy;
+        this.Resources["bgColor"] = colorSilver;
 
-        tipLabel.TextColor = colorNavy;
-        billLabel.TextColor = colorNavy;
-        totalLabel.TextColor = colorNavy;
-        tipOutput.TextColor = colorNavy;
-        totalOutput.TextColor = colorNavy;
     }
 
     void OnDark(object sender, EventArgs e)
     {
-        LayoutRoot.BackgroundColor = colorNavy;
-
-        tipLabel.TextColor = colorSilver;
-        billLabel.TextColor = colorSilver;
-        totalLabel.TextColor = colorSilver;
-        tipOutput.TextColor = colorSilver;
-        totalOutput.TextColor = colorSilver;
+        this.Resources["fgColor"] = colorSilver;
+        this.Resources["bgColor"] = colorNavy;
     }
 
     async void GotoCustom(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync(nameof(MainPageCsharp));
-    }
-
-    private Color BgColor(){
-        if (this.Resources.TryGetValue("bgColor", out var res))
-        {
-            return (Color)res;
-        }
-        else
-        {
-            return colorNavy;
-        }
-    }
-
-    private Color FgColor()
-    {
-        if (this.Resources.TryGetValue("fgColor", out var res))
-        {
-            return (Color)res;
-        }
-        else
-        {
-            return colorSilver;
-        }
-    }
-
-    private double FontSize() {
-        if (this.Resources.TryGetValue("fontSize", out var res))
-        {
-            return (double)res;
-        }
-        else
-        {
-            return fontSize;
-        }
-
     }
 
 }
