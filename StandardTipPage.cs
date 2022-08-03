@@ -102,7 +102,7 @@ public class StandardTipPage: ContentPage
         };
         var buttonDark = new Button()
         {
-            Text = "Dart",
+            Text = "Dark",
             TextColor = Colors.White
         };
 
@@ -122,13 +122,11 @@ public class StandardTipPage: ContentPage
         horizontalLayout.Add(buttonDark);
         Grid.SetColumn(buttonLight, 0);
         Grid.SetColumn(buttonDark, 1);
-        //Grid.SetRow(buttonLight,5);
-        //Grid.SetRow(buttonDark,5);
 
 
         this.Content = LayoutRoot;
 
-        Title = "Grid Example";
+        Title = "Grid Example with Pages";
 
         billInput.TextChanged += (s, e) => CalculateTip();
       }
