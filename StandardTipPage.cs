@@ -1,6 +1,7 @@
 ﻿using Microsoft.Maui;
 using Microsoft.Maui.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using Application = Microsoft.Maui.Controls.Application;
 
 namespace ExampleMauiApp;
 
@@ -8,8 +9,7 @@ public class StandardTipPage: ContentPage
 {
     private Color colorNavy = Colors.Navy;
     private Color colorSilver = Colors.Silver;
-    private double fontSizeC = 22.0;
-
+   
     Entry billInput;
     Label totalOutput;
     Label tipOutput;
@@ -20,7 +20,7 @@ public class StandardTipPage: ContentPage
    
     public StandardTipPage()
     {
-        var resources = new ResourceDictionary
+/*        var resources = new ResourceDictionary
         {
             { "bgColor", Colors.Navy },
             { "fgColor", Colors.Silver}
@@ -56,7 +56,7 @@ public class StandardTipPage: ContentPage
         resources.Add("infoLabelStyle", infoLabelStyle);
 
 
-        this.Resources = resources;
+        this.Resources = resources;*/
 
         LayoutRoot = new()
         {
@@ -81,7 +81,7 @@ public class StandardTipPage: ContentPage
         billLabel = new Label()
         {
             Text = "Bill",
-            Style = (Style)this.Resources["infoLabelStyle"]
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
 
         billLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
@@ -100,14 +100,14 @@ public class StandardTipPage: ContentPage
         tipLabel = new Label()
         {
             Text = "Tip",
-            Style = (Style)this.Resources["infoLabelStyle"]
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
         tipLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
  
         tipOutput = new Label() 
         {
             Text = "0.00",
-            Style = (Style)this.Resources["baseLabelStyle"]
+            Style = (Style)Application.Current.Resources["baseLabelStyle"]
         };
 
         tipOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
@@ -119,13 +119,13 @@ public class StandardTipPage: ContentPage
         totalLabel = new Label()
         {
             Text = "Total",
-            Style = (Style)this.Resources["infoLabelStyle"]
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
         totalLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
         totalOutput = new Label()
         { 
             Text = "0.00",
-            Style = (Style)this.Resources["baseLabelStyle"]
+            Style = (Style)Application.Current.Resources["baseLabelStyle"]
         };
         totalOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
         

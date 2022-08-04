@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Maui.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using Application = Microsoft.Maui.Controls.Application;
 
 namespace ExampleMauiApp;
 public class MainPageCsharp : ContentPage
@@ -41,8 +42,7 @@ public class MainPageCsharp : ContentPage
         var billLabel = new Label()
         {
             Text = "Bill",
-            WidthRequest = 100,
-            VerticalOptions = LayoutOptions.Center
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
 
         billInput = new Entry()
@@ -57,7 +57,7 @@ public class MainPageCsharp : ContentPage
         var labelTip = new Label()
         {
             Text = "Tip",
-            WidthRequest = 100,
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
         tipOutput = new Label() { Text = "0.00" };
 
@@ -68,7 +68,7 @@ public class MainPageCsharp : ContentPage
         var labelTotal = new Label()
         {
             Text = "Total",
-            WidthRequest = 100
+            Style = (Style)Application.Current.Resources["infoLabelStyle"]
         };
         totalOutput = new Label() { Text = "0.00" };
 
