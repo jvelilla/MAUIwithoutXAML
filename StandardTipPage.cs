@@ -8,7 +8,7 @@ public class StandardTipPage: ContentPage
 {
     private Color colorNavy = Colors.Navy;
     private Color colorSilver = Colors.Silver;
-    private double fontSize = 22.0;
+    private double fontSizeC = 22.0;
 
     Entry billInput;
     Label totalOutput;
@@ -25,16 +25,23 @@ public class StandardTipPage: ContentPage
             { "bgColor", Colors.Navy },
             { "fgColor", Colors.Silver}
         };
+
+        // Define a Base Style
+        var baseLabelStyle = new Style(typeof(Label));
+        // Define a setter for FontSize
+        Setter fontSize = new Setter();
+        fontSize.Property = Label.FontSizeProperty;
+        fontSize.Value = this.fontSizeC;
+        //Add the setters to the base style.
+        baseLabelStyle.Setters.Add(fontSize);
         
+
 
         // Define a Style for a label and set the to `infoLabelStyle`
         var infoLabelStyle = new Style(typeof(Label));
+        // use style inheritance
+        infoLabelStyle.BasedOn = baseLabelStyle;
         
-        // Define a setter for FontSize
-        Setter fontSizeSetter = new Setter();
-        fontSizeSetter.Property = Label.FontSizeProperty;
-        fontSizeSetter.Value = fontSize;
-
         // Define a setter for FontAttribute
         Setter fontAttribtuesSetter = new Setter();
         fontAttribtuesSetter.Property = Label.FontAttributesProperty;
@@ -42,10 +49,10 @@ public class StandardTipPage: ContentPage
 
 
         //Add the setters to the style.
-        infoLabelStyle.Setters.Add(fontSizeSetter);
         infoLabelStyle.Setters.Add(fontAttribtuesSetter);
 
-        // Add the style to the resource page.
+        // Add the styles to the resource page.
+        resources.Add("baseLabelStyle", baseLabelStyle);
         resources.Add("infoLabelStyle", infoLabelStyle);
 
 
@@ -99,9 +106,10 @@ public class StandardTipPage: ContentPage
  
         tipOutput = new Label() 
         {
-            Text = "0.00", 
-            FontSize = fontSize
+            Text = "0.00",
+            Style = (Style)this.Resources["baseLabelStyle"]
         };
+
         tipOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
         
         LayoutRoot.Add(tipLabel, 0, 1);
@@ -116,8 +124,8 @@ public class StandardTipPage: ContentPage
         totalLabel.SetDynamicResource(Label.TextColorProperty, "fgColor");
         totalOutput = new Label()
         { 
-            Text = "0.00", 
-            FontSize = fontSize
+            Text = "0.00",
+            Style = (Style)this.Resources["baseLabelStyle"]
         };
         totalOutput.SetDynamicResource(Label.TextColorProperty, "fgColor");
         
